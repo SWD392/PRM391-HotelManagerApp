@@ -1,14 +1,14 @@
 package com.example.final_project.entity;
 
 public class RoomStatus {
-    public Long id;
+    public int id;
 
     public String statusName;
 
     public RoomStatus() {
     }
 
-    public RoomStatus(Long id, String statusName) {
+    public RoomStatus(int id, String statusName) {
         this.id = id;
         this.statusName = statusName;
     }

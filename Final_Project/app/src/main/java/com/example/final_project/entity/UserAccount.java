@@ -1,21 +1,12 @@
 package com.example.final_project.entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "userAccount")
 public class UserAccount {
-    @PrimaryKey(autoGenerate = true)
     public Long id;
 
-    @ColumnInfo(name = "username")
     public String userName;
 
-    @ColumnInfo(name = "account")
     public String account;
 
-    @ColumnInfo(name = "password")
     public String password;
 
     public Long getId() {

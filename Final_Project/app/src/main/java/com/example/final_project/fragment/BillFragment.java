@@ -89,9 +89,9 @@ public class BillFragment extends Fragment {
     private List<RoomStatus> getListStatus() {
         //todo: Trả về list các status có trong db (tạm thời fix cứng data)
         List<RoomStatus> roomStatuses = new ArrayList<>();
-        roomStatuses.add(new RoomStatus(1L, "Chua tra"));
-        roomStatuses.add(new RoomStatus(2L, "Da tra"));
-        roomStatuses.add(new RoomStatus(3L, "Chua nhan phong"));
+        roomStatuses.add(new RoomStatus(1, "Chua tra"));
+        roomStatuses.add(new RoomStatus(2, "Da tra"));
+        roomStatuses.add(new RoomStatus(3, "Chua nhan phong"));
         return roomStatuses;
     }
 }

@@ -11,6 +11,9 @@ import java.util.List;
 @Dao
 public interface UserAccountDAO {
 
+
+    //todo: @Tùng sửa lại file này nhé
+
     @Query("Select * from userAccount where account = :account and password = :password")
     UserAccount getByAccountAndPassword(String account, String password);
 
