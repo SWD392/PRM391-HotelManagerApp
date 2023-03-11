@@ -3,11 +3,11 @@ package com.example.final_project.entity;
 public class ServiceType {
     private int id;
     private String name;
-    private int price;
+    private String price;
     public ServiceType() {
     }
 
-    public ServiceType(int id, String name,int price) {
+    public ServiceType(int id, String name,String price) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -29,11 +29,11 @@ public class ServiceType {
         this.name = name;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
