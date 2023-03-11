@@ -18,6 +18,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
+        Fragment fragment =null;
         switch (position) {
             case 0:
                 return new BillFragment();
@@ -26,10 +27,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return new RoomFragment();
             case 3:
-            default:
                 return new CustomerFragment();
 
+
         }
+        return fragment;
     }
 
     @Override
