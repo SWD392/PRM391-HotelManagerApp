@@ -35,7 +35,7 @@ public class RoomViewPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 2;
     }
-
+///Set ViewPagger Title
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
@@ -47,7 +47,6 @@ public class RoomViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 title = "Room Type";
                 break;
-
         }
         return title;
     }
