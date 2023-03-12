@@ -68,6 +68,10 @@ public int deleteRoomType(int  id){
       return getDaTa(query);
     }
 
-
+    public RoomType getID(String id){
+        String sql = "SELECT * FROM RoomType WHERE id=?";
+        List<RoomType> list = getDaTa(sql,id);
+        return list.get(0);
+    }
 
 }

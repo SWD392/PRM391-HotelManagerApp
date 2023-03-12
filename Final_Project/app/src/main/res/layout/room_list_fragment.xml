@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.RoomFragment">
+    tools:context=".fragment.RoomFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_phong"
+        android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -16,11 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rcv_phong"
+        app:layout_constraintTop_toTopOf="@+id/rcv_roomList"
         app:layout_constraintVertical_bias="0.97"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_phong"
+        android:id="@+id/rcv_roomList"
         android:layout_width="409dp"
         android:layout_height="609dp"
         android:layout_marginBottom="4dp"
