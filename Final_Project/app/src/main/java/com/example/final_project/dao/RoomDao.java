@@ -49,7 +49,7 @@ public class RoomDao {
         values.put("status_id",room.getStatus());
         values.put("name",room.getName());
         values.put("price",room.getPrice());
-        values.put("room_category_id",room.getRoom_type_id());
+        values.put("room_category_id",room.getRoomTypeId());
 
 
         return db.insert("Room",null,values);

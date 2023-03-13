@@ -133,7 +133,7 @@ private TextInputEditText room_name,room_price;
                 } else {
                     room = new Room();
                     room.setName(room_name.getText().toString());
-                    room.setRoom_type_id(roomType);
+                    room.setRoomTypeId(roomType);
                     room.setPrice(Integer.parseInt(room_price.getText().toString()));
                     room.setStatus(0);
                     if (roomDao.insertRoom(room) > 0) {

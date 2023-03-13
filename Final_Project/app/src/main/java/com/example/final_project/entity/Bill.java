@@ -3,7 +3,7 @@ package com.example.final_project.entity;
 public class Bill {
     private int id;
 
-    private int managerId;
+    private int managerId; //null
 
     private int customerId;
 
@@ -38,7 +38,6 @@ public class Bill {
         this.status = status;
         this.note = note;
         this.billDate = billDate;
-        this.servicePrice = servicePrice;
         this.roomPrice = roomPrice;
         this.billTotal = billTotal;
     }
