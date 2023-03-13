@@ -17,11 +17,6 @@ import com.example.final_project.entity.ServiceType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TypeServiceFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TypeServiceFragment extends Fragment {
 
     private RecyclerView rcvTypeService;

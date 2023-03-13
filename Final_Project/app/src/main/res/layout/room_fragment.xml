@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.RoomFragment"
+    android:orientation="vertical">
 
-    >
-
-    <TextView
-        android:id="@+id/tv_1"
-        android:layout_width="wrap_content"
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Fragment 3"
-        android:layout_centerHorizontal="true"
+        android:id="@+id/id_tablayout"
+        app:tabSelectedTextColor="@color/design_default_color_on_secondary"
+
         />
-</RelativeLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/id_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+
+</LinearLayout>

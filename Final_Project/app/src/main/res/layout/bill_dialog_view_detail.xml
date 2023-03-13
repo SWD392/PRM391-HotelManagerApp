@@ -16,13 +16,13 @@
             android:layout_height="50dp"
             android:background="@color/dark_blue"
             android:gravity="center"
-            android:text="Add Bill"
+            android:text="Bill Detail"
             android:textColor="@color/white"
             android:textSize="30dp"
             android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="272dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/custom_bill_dialog"
@@ -41,18 +41,19 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/start_date_btn"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/calendar" />
 
                     <TextView
-                        android:id="@+id/start_date_tv"
-                        android:layout_width="200dp"
+                        android:id="@+id/start_date_detail"
+                        android:layout_width="219dp"
                         android:layout_height="match_parent"
                         android:enabled="false"
                         android:hint="Start Date"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -62,30 +63,23 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/end_date_btn"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/calendar" />
 
                     <TextView
-                        android:id="@+id/end_date_tv"
-                        android:layout_width="200dp"
+                        android:id="@+id/end_date_detail"
+                        android:layout_width="218dp"
                         android:layout_height="match_parent"
                         android:enabled="false"
                         android:hint="End Date"
-                        android:padding="10dp" />
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+
+                        android:textSize="17sp" />
                 </LinearLayout>
 
             </LinearLayout>
-
-            <Button
-                android:id="@+id/find_room_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:backgroundTint="@color/dark_blue"
-                android:text="Find" />
         </LinearLayout>
 
         <LinearLayout
@@ -94,17 +88,21 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Customer"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <Spinner
-                android:id="@+id/spinner_customer"
+            <TextView
+                android:id="@+id/customer_name_detail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Customer_name"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
 
         </LinearLayout>
 
@@ -114,17 +112,21 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Room"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <Spinner
-                android:id="@+id/spinner_room"
+            <TextView
+                android:id="@+id/room_detail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Room"
+                android:textSize="15sp"
+                android:textColor="@color/black" />
 
 
         </LinearLayout>
@@ -135,26 +137,21 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Serivce"
+                android:text="Status"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <Spinner
-                android:id="@+id/spinner_service"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
+            <TextView
+                android:id="@+id/status_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHECK IN"
+                android:textColor="#FF0000" />
 
         </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/checkbox_checkout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Check out" />
 
         <TextView
             android:layout_width="match_parent"
@@ -162,8 +159,8 @@
             android:text="Note"
             android:textColor="@color/black" />
 
-        <EditText
-            android:id="@+id/bill_note"
+        <TextView
+            android:id="@+id/bill_note_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -182,16 +179,21 @@
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/total_bill"
-                android:layout_width="200dp"
-                android:layout_height="match_parent" />
-
-            <ImageView
-                android:id="@+id/refresh_btn"
-                android:layout_width="45dp"
+                android:id="@+id/total_bill_detail"
+                android:layout_width="239dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:src="@drawable/refresh_icon" />
+                android:gravity="center"
+                android:text="1000"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="$"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -201,20 +203,13 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/add_bill"
+                android:id="@+id/done_btn"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/dark_blue"
-                android:text="Add" />
+                android:text="Done" />
 
-            <Button
-                android:id="@+id/cancel"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity=""
-                android:backgroundTint="#9A9898"
-                android:text="Cancel" />
         </LinearLayout>
 
 

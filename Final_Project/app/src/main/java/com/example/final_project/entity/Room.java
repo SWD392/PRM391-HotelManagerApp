@@ -3,19 +3,19 @@ package com.example.final_project.entity;
 public class Room {
     private int id;
     private String name;
-    private int room_type_id;
+    private int roomTypeId;
     private int price;
-    private int status_id;
+    private int statusId;
 
     public Room() {
     }
 
-    public Room(int id, String name, int room_type_id, int price, int status) {
+    public Room(int id, String name, int roomTypeId, int price, int status) {
         this.id = id;
         this.name = name;
-        this.room_type_id = room_type_id;
+        this.roomTypeId = roomTypeId;
         this.price = price;
-        this.status_id = status;
+        this.statusId = status;
     }
 
     public int getId() {
@@ -34,12 +34,12 @@ public class Room {
         this.name = name;
     }
 
-    public int getRoom_type_id() {
-        return room_type_id;
+    public int getRoomTypeId() {
+        return roomTypeId;
     }
 
-    public void setRoom_type_id(int room_type_id) {
-        this.room_type_id = room_type_id;
+    public void setRoomTypeId(int room_type_id) {
+        this.roomTypeId = roomTypeId;
     }
 
     public int getPrice() {
@@ -51,11 +51,11 @@ public class Room {
     }
 
     public int getStatus() {
-        return status_id;
+        return statusId;
     }
 
     public void setStatus(int status) {
-        this.status_id = status;
+        this.statusId = status;
     }
 
 }
