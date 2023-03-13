@@ -35,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         account = findViewById(R.id.account_login);
         password = findViewById(R.id.password_login);
 
-        titleAccount = findViewById(R.id.title_account);
-        titlePassword = findViewById(R.id.title_password);
+        titleAccount = findViewById(R.id.title_account_login);
+        titlePassword = findViewById(R.id.til_password_login);
 
         loginBtn = findViewById(R.id.btn_login);
         register = findViewById(R.id.tv_register);
@@ -54,17 +54,19 @@ public class LoginActivity extends AppCompatActivity {
                 if (password.getText().toString().equals("")) {
                     titlePassword.setError("Password was not blank");
                 }
-            } else {
+            } else  {
                 UserAccount userAccount = userAccountDatabase.userAccountDAO().getByAccountAndPassword(
                         account.getText().toString(),
                         password.getText().toString()
                 );
                 if (userAccount != null) {
+                    Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 } else {
-                    titleAccount.setError("Account may not exist");
-                    titlePassword.setError("Password may not exist");
+                    account.setError("Account may not exist");
+                    password.setError("Password may not exist");
+
                 }
             }
         });
