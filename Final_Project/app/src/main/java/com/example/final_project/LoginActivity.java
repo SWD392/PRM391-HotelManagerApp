@@ -54,17 +54,19 @@ public class LoginActivity extends AppCompatActivity {
                 if (password.getText().toString().equals("")) {
                     titlePassword.setError("Password was not blank");
                 }
-            } else {
+            } else  {
                 UserAccount userAccount = userAccountDatabase.userAccountDAO().getByAccountAndPassword(
                         account.getText().toString(),
                         password.getText().toString()
                 );
                 if (userAccount != null) {
+                    Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 } else {
-                    titleAccount.setError("Account may not exist");
-                    titlePassword.setError("Password may not exist");
+                    account.setError("Account may not exist");
+                    password.setError("Password may not exist");
+
                 }
             }
         });
