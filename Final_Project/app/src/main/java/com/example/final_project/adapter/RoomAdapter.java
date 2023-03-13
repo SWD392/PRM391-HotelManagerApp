@@ -79,7 +79,7 @@ RoomType roomType;
         roomTypeDao =new RoomTypeDao(context);
         listRoomType = roomTypeDao.getListRoomType();
         try {
-            roomType = roomTypeDao.getID(String.valueOf(room.getRoom_type_id()));
+            roomType = roomTypeDao.getID(String.valueOf(room.getRoomTypeId()));
         }catch (Exception e){
             Log.d("Error", "onBindViewHolder room adapter");
         }
@@ -167,7 +167,7 @@ RoomType roomType;
                 spn.setAdapter(spinnerRoomType);
                 for (int i=0;i<spn.getCount();i++){
                     listRoomType = roomTypeDao.getListRoomType();
-                    if (list.get(position).getRoom_type_id() == listRoomType.get(i).getId()){
+                    if (list.get(position).getRoomTypeId() == listRoomType.get(i).getId()){
                         spn.setSelection(i);
                     }
                 }

@@ -85,12 +85,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS Bill");
         db.execSQL("DROP TABLE IF EXISTS UserAccount");
         db.execSQL("DROP TABLE IF EXISTS Customer");
         db.execSQL("DROP TABLE IF EXISTS RoomStatus");
         db.execSQL("DROP TABLE IF EXISTS Room");
         db.execSQL("DROP TABLE IF EXISTS Room_Type");
-        db.execSQL("DROP TABLE IF EXISTS Bill");
 //        db.execSQL("DROP TABLE IF EXISTS Bill_Details");
         db.execSQL("DROP TABLE IF EXISTS Service");
     }

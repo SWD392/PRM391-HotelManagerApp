@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.final_project.R;
+import com.example.final_project.dao.BillDAO;
 import com.example.final_project.entity.Bill;
 
 import java.text.SimpleDateFormat;
@@ -58,17 +59,17 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         holder.bill = bill;
 
         switch (bill.getStatus()) {
-            case 0:
+            case 1:
                 //not check-in
                 break;
-            case 1:
+            case 2:
                 //check-in, not check-out
                 holder.billStatus.setVisibility(View.VISIBLE);
                 holder.billStatus.setText("CHECK IN");
                 holder.billStatus.setTextColor(Color.RED);
                 holder.checkInBtn.setText("Check out");
                 break;
-            case 2:
+            case 3:
             default:
                 holder.billStatus.setVisibility(View.VISIBLE);
                 holder.billStatus.setText("CHECK OUT");
@@ -93,10 +94,13 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         private Button checkInBtn;
         private Button viewDetail;
 
+        private Button cancelBillButton;
+
         private TextView billStatus;
 
         public BillViewHolder(@NonNull View view) {
             super(view);
+            BillDAO billDAO = new BillDAO(view.getContext());
             roomName = view.findViewById(R.id.room_name);
             customerName = view.findViewById(R.id.customer_name);
             fromDate = view.findViewById(R.id.from_date);
@@ -105,9 +109,14 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
             checkInBtn = view.findViewById(R.id.check_in_btn);
             viewDetail = view.findViewById(R.id.view_detail_bill_btn);
             billStatus = view.findViewById(R.id.tv_bill_status);
+            cancelBillButton = view.findViewById(R.id.cancel_bill_btn);
 
             viewDetail.setOnClickListener(button -> {
                 openDialogDetail(view);
+            });
+
+            cancelBillButton.setOnClickListener(button -> {
+
             });
         }
 
@@ -158,6 +167,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
             doneViewBtn.setOnClickListener(button -> {
                 dialog.cancel();
             });
+
             dialog.show();
         }
     }

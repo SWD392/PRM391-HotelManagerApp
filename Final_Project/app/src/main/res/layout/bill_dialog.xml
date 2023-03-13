@@ -52,6 +52,7 @@
                         android:layout_height="match_parent"
                         android:enabled="false"
                         android:hint="Start Date"
+                        android:textColor="@color/black"
                         android:padding="10dp" />
                 </LinearLayout>
 
@@ -73,6 +74,7 @@
                         android:layout_height="match_parent"
                         android:enabled="false"
                         android:hint="End Date"
+                        android:textColor="@color/black"
                         android:padding="10dp" />
                 </LinearLayout>
 
@@ -109,9 +111,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -123,27 +127,6 @@
 
             <Spinner
                 android:id="@+id/spinner_room"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Serivce"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <Spinner
-                android:id="@+id/spinner_service"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -183,15 +166,19 @@
 
             <TextView
                 android:id="@+id/total_bill"
-                android:layout_width="200dp"
-                android:layout_height="match_parent" />
-
-            <ImageView
-                android:id="@+id/refresh_btn"
-                android:layout_width="45dp"
+                android:layout_width="239dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:src="@drawable/refresh_icon" />
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="$"
+                android:textColor="@color/black"
+                android:textSize="25sp" />
         </LinearLayout>
 
         <LinearLayout
