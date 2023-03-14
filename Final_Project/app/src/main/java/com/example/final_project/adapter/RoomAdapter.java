@@ -85,8 +85,8 @@ RoomType roomType;
         }
         holder.item_phong_loaiphong.setText("Room Type: \n"+roomType.getName());
 
-        holder.item_phong_giaphong.setText("Giá phòng: \n"+room.getPrice()+" VNĐ");
-
+        holder.item_phong_giaphong.setText("Price: \n"+room.getPrice()+" VNĐ");
+///delete
         RoomDao dao = new RoomDao( context);
 //        holder. imageView. setOnClickListener(new View.OnClickListener() {
 //            @Override
