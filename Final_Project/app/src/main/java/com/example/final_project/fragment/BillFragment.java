@@ -69,12 +69,6 @@ public class BillFragment extends Fragment {
     TextView tvNote;
     TextView totalBill;
     Button findRoom;
-    ImageView refresh;
-
-    private int id;
-
-    private int managerId;
-
     private int customerId;
 
     private int roomId;
@@ -96,53 +90,7 @@ public class BillFragment extends Fragment {
         billDao = new BillDAO(view.getContext());
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView recyclerView = view.findViewById(R.id.rcv_bill);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        List<Bill> billList = getBillList(billDao);
-
-
-        Spinner spnRoomStatus = view.findViewById(R.id.spinner_status_hd);
-        statusAdapter = new StatusSpinnerAdapter(view.getContext(), R.layout.item_status_spinner_selected, getListStatus());
-        spnRoomStatus.setAdapter(statusAdapter);
-
-        spnRoomStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int statusId = statusAdapter.getItem(position).id;
-                switch (statusId) {
-                    case 1:
-                        //not check in
-                        List<Bill> billNotCheckIns = billList.stream()
-                                .filter(bill -> bill.getStatus() == 1)
-                                .collect(Collectors.toList());
-                        recyclerView.setLayoutManager(linearLayoutManager);
-                        recyclerView.setAdapter(new BillAdapter(billNotCheckIns, getContext()));
-                        break;
-                    case 2:
-                        List<Bill> billCheckIns = billList.stream()
-                                .filter(bill -> bill.getStatus() == 2)
-                                .collect(Collectors.toList());
-                        recyclerView.setLayoutManager(linearLayoutManager);
-                        recyclerView.setAdapter(new BillAdapter(billCheckIns, getContext()));
-                        break;
-                    case 3:
-                    default:
-                        List<Bill> billCheckOuts = billList.stream()
-                                .filter(bill -> bill.getStatus() == 3)
-                                .collect(Collectors.toList());
-                        recyclerView.setLayoutManager(linearLayoutManager);
-                        recyclerView.setAdapter(new BillAdapter(billCheckOuts, getContext()));
-                        break;
-                }
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        getBillRecyclerView(view);
 
         ImageView addViewBtn = view.findViewById(R.id.add_bill_btn);
         addViewBtn.setOnClickListener(button -> {
@@ -150,6 +98,7 @@ public class BillFragment extends Fragment {
         });
 
     }
+
 
     private void openAddBillDialog(View view) {
         billDao = new BillDAO(view.getContext());
@@ -281,12 +230,61 @@ public class BillFragment extends Fragment {
             if (billDao.insert(bill) > 0) {
                 Toast.makeText(view.getContext(), "Add bill success", Toast.LENGTH_SHORT).show();
                 dialog.cancel();
+                getBillRecyclerView(view);
             } else {
                 Toast.makeText(view.getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
 
         dialog.show();
+    }
+
+    private void getBillRecyclerView(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.rcv_bill);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        List<Bill> billList = getBillList(billDao);
+
+
+        Spinner spnRoomStatus = view.findViewById(R.id.spinner_status_hd);
+        statusAdapter = new StatusSpinnerAdapter(view.getContext(), R.layout.item_status_spinner_selected, getListStatus());
+        spnRoomStatus.setAdapter(statusAdapter);
+
+        spnRoomStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int statusId = statusAdapter.getItem(position).id;
+                switch (statusId) {
+                    case 1:
+                        //not check in
+                        List<Bill> billNotCheckIns = billList.stream()
+                                .filter(bill -> bill.getStatus() == 1)
+                                .collect(Collectors.toList());
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(new BillAdapter(billNotCheckIns, getContext()));
+                        break;
+                    case 2:
+                        List<Bill> billCheckIns = billList.stream()
+                                .filter(bill -> bill.getStatus() == 2)
+                                .collect(Collectors.toList());
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(new BillAdapter(billCheckIns, getContext()));
+                        break;
+                    case 3:
+                    default:
+                        List<Bill> billCheckOuts = billList.stream()
+                                .filter(bill -> bill.getStatus() == 3)
+                                .collect(Collectors.toList());
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(new BillAdapter(billCheckOuts, getContext()));
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private String getNowDate() {
@@ -320,11 +318,6 @@ public class BillFragment extends Fragment {
     }
 
     private List<Bill> getBillList(BillDAO billDAO) {
-//        List<Bill> billList = new ArrayList<>();
-//        billList.add(new Bill(1, 1, 1, 1, "12/3/2023", "13/3/2023", 1, "", "12/3/2023", 1000, 1000, 1000));
-//        billList.add(new Bill(2, 1, 3, 14, "12/3/2023", "13/3/2023", 0, "", "12/3/2023", 1000, 1000, 1000));
-//        billList.add(new Bill(3, 1, 2, 15, "12/3/2023", "15/3/2023", 2, "", "12/3/2023", 1000, 1000, 1000));
-//        return billList;
         return billDAO.getAll();
     }
 

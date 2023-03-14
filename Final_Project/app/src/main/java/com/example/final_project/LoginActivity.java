@@ -35,8 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         account = findViewById(R.id.account_login);
         password = findViewById(R.id.password_login);
 
-        titleAccount = findViewById(R.id.title_account);
-        titlePassword = findViewById(R.id.title_password);
+        titleAccount = findViewById(R.id.title_account_login);
+        titlePassword = findViewById(R.id.til_password_login);
 
         loginBtn = findViewById(R.id.btn_login);
         register = findViewById(R.id.tv_register);
