@@ -38,6 +38,25 @@ public class BillDAO {
         return db.insert("Bill", null, values);
     }
 
+    public boolean update(Bill bill) {
+        ContentValues values = new ContentValues();
+        values.put("customer_id", bill.getCustomerId());
+        values.put("room_id", bill.getRoomId());
+        values.put("from_date", String.valueOf(bill.getFromDate()));
+        values.put("end_date", String.valueOf(bill.getEndDate()));
+        values.put("status", bill.getStatus());
+        values.put("note", bill.getNote());
+        values.put("bill_date", String.valueOf(bill.getBillDate()));
+        values.put("bill_total", bill.getBillTotal());
+        values.put("service_price", bill.getServicePrice());
+        values.put("room_price", bill.getRoomPrice());
+        return db.update("Bill", values, "id = " + bill.getId(), null) > 0;
+    }
+
+    public boolean deleteBill(int id) {
+        return db.delete("Bill", "id = " + id, null) > 0;
+    }
+
     public List<Bill> getLastBill() {
         String query = "select * from bill order by id desc limit 1";
         return getData(query);
