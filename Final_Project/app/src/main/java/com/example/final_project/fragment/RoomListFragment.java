@@ -40,47 +40,48 @@ public class RoomListFragment extends Fragment {
     private RecyclerView rcv;
     FloatingActionButton fbutton;
     RoomAdapter roomAdapter;
-    List<RoomType> listRoomType =new ArrayList<>();
+    List<RoomType> listRoomType = new ArrayList<>();
     RoomTypeDao roomTypeDao;
     SpinnerRoomType spinnerRoomType;
-private Spinner spn_roomType;
-private Button btn_add,btn_cancel;
-private TextInputEditText room_name,room_price;
+    private Spinner spn_roomType;
+    private Button btn_add, btn_cancel;
+    private TextInputEditText room_name, room_price;
     RoomDao roomDao;
     List<String> error_noti;
-    private List<Room> list=new ArrayList<>();
+    private List<Room> list = new ArrayList<>();
     int roomType;
     Room room;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view= inflater.inflate(R.layout.room_list_fragment, container, false);
+        View view = inflater.inflate(R.layout.room_list_fragment, container, false);
         rcv = view.findViewById(R.id.rcv_roomList);
-        fbutton=view.findViewById(R.id.btn_add);
-        roomDao =new RoomDao(getContext());
-        list=roomDao.getListRoom();
-        roomAdapter = new RoomAdapter(getContext(),list);
+        fbutton = view.findViewById(R.id.btn_add);
+        roomDao = new RoomDao(getContext());
+        list = roomDao.getListRoom();
+        roomAdapter = new RoomAdapter(getContext(), list);
         roomTypeDao = new RoomTypeDao(getActivity());
 
         fbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listRoomType = roomTypeDao.getListRoomType();
-                if (listRoomType.size()==0){
+                if (listRoomType.size() == 0) {
                     error_noti.add(" Room Type ");
                 }
-                if (error_noti.isEmpty()){
+                if (error_noti.isEmpty()) {
                     opendialog();
-                }else{
-                    Toast.makeText(getActivity(), "You must add Room Type : "+error_noti, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "You must add Room Type : " + error_noti, Toast.LENGTH_SHORT).show();
                     error_noti = new ArrayList<>();
                 }
             }
         });
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         rcv.setLayoutManager(gridLayoutManager);
-        roomAdapter=new RoomAdapter(getContext(),list);
+        roomAdapter = new RoomAdapter(getContext(), list);
         rcv.setAdapter(roomAdapter);
         error_noti = new ArrayList<>();
 
@@ -89,23 +90,23 @@ private TextInputEditText room_name,room_price;
     }
 
 
-    private void opendialog(){
+    private void opendialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout.add_room_dialog, null);
         builder.setView(view);
         Dialog dialog = builder.create();
         Window window = dialog.getWindow();
-        if(window==null){
+        if (window == null) {
             return;
         }
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
-        room_name=dialog.findViewById(R.id.roomname);
-        room_price=dialog.findViewById(R.id.room_price);
-        spn_roomType=dialog.findViewById(R.id.spn_roomType);
-        btn_add=dialog.findViewById(R.id.btn_add);
-        btn_cancel=dialog.findViewById(R.id.btn_cancel);
+        room_name = dialog.findViewById(R.id.roomname);
+        room_price = dialog.findViewById(R.id.room_price);
+        spn_roomType = dialog.findViewById(R.id.spn_roomType);
+        btn_add = dialog.findViewById(R.id.btn_add);
+        btn_cancel = dialog.findViewById(R.id.btn_cancel);
 
         spinnerRoomType = new SpinnerRoomType(getContext(), (ArrayList<RoomType>) roomTypeDao.getListRoomType());
         spn_roomType.setAdapter(spinnerRoomType);

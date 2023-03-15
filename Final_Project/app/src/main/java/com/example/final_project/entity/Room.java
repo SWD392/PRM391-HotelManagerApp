@@ -38,7 +38,7 @@ public class Room {
         return roomTypeId;
     }
 
-    public void setRoomTypeId(int room_type_id) {
+    public void setRoomTypeId(int roomTypeId) {
         this.roomTypeId = roomTypeId;
     }
 
