@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="15dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:padding="6dp"
+            android:background="@color/dark_blue"
+            android:textColor="@color/white"
+            android:text="Customer"
+            android:layout_width="match_parent"
+            android:id="@+id/txtTitel"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:padding="6dp"
+                android:id="@+id/edName"
+                android:hint="Customer Name"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/custom_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+            <EditText
+                android:padding="6dp"
+                android:id="@+id/edPhone"
+                android:hint="Phone Number"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/custom_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:inputType="number"/>
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:background="@drawable/custom_edittext"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imgdate"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <EditText
+                    android:padding="6dp"
+                    android:id="@+id/edBirthday"
+                    android:hint="Birthday"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnAdd"
+                android:text="Add"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:backgroundTint="#002c58"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnCancel"
+                android:text="Cancel"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_marginLeft="20dp"
+                android:backgroundTint="#8C8989"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
