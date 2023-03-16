@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="type_service_fragment">Type Service fragment</string>
     <string name="bill_service_fragment">Bill Service fragment</string>
+    <string name="hello_blank_fragment">Bill Service fragment</string>
     <string name="title_activity_update_service">UpdateServiceActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

@@ -18,7 +18,7 @@
             android:id="@+id/add_service_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ngày tạo: "
+            android:text="Created date: "
             android:layout_marginLeft="10dp"
             android:textSize="20dp"
             android:layout_marginTop="10dp"
@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hóa đơn của: "
+                android:text="Bill of: "
                 android:textSize="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"/>
@@ -50,7 +50,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Loại dịch vụ: "
+                android:text="Type Service: "
                 android:textSize="20dp"
                 android:layout_margin="10dp"/>
             <Spinner
@@ -69,7 +69,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Số lượng dịch vụ: "
+                android:text="Service quantity: "
                 android:textSize="20dp"
                 android:layout_margin="10dp"/>
             <EditText
@@ -90,7 +90,7 @@
                 android:id="@+id/add_service_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tổng tiền: "
+                android:text="Total: "
                 android:layout_marginLeft="10dp"
                 android:textSize="20dp"
                 android:layout_weight="9"
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="10dp"
-                android:text="Thêm"/>
+                android:text="Add"/>
 
 
         </LinearLayout>
