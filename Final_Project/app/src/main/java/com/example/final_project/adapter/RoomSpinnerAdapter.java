@@ -31,7 +31,7 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
         if (room != null) {
             tvRoom.setText("Room: " + room.getName());
             //todo: tìm tên room type, tạm thời chỉ set type_id
-            tvRoomType.setText("Type: " + room.getRoomTypeId());
+            tvRoomType.setText("Type: " + room.getRoom_type_id());
         }
         return convertView;
     }
@@ -45,7 +45,7 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
         Room room = this.getItem(position);
         if (room != null) {
             tvRoom.setText("Room: " + room.getName());
-            tvRoomType.setText("Type: " + room.getRoomTypeId());
+            tvRoomType.setText("Type: " + room.getRoom_type_id());
 
         }
         return convertView;

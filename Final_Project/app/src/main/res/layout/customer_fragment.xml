@@ -10,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
         android:src="@drawable/add_circle_24"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"/>
@@ -27,7 +27,7 @@
         android:id="@+id/listCustomer"
         android:layout_width="match_parent"
         android:layout_height="623dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:layout_below="@+id/search"
         tools:listitem="@layout/item_customer"/>
 </RelativeLayout>
