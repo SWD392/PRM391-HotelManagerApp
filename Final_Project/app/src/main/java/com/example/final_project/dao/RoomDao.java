@@ -68,6 +68,15 @@ public class RoomDao {
 
     }
 
+    public int update(Room room){
+        ContentValues values = new ContentValues();
+        values.put("name", room.getName());
+        values.put("room_type_id", room.getRoomTypeId());
+        values.put("price", room.getPrice());
+        values.put("status_id", room.getStatus());
+        return db.update("Room", values,"id= ?",new String[]{room.getId()+""});
+    }
+
     public void insert(String name, int price, int status, int room_type_id) {
 
         // calling a method to get writable database.
@@ -82,5 +91,16 @@ public class RoomDao {
         // and we are comparing it with name of our course which is stored in original name variable.
         db.insert("Room",null, values);
 
+    }
+    public int delete(int id){
+        Cursor cursor = db.rawQuery("SELECT * FROM Bill WHERE room_id=?",new String[]{String.valueOf(id)});
+        if (cursor.getCount()!=0){
+            return -1 ;
+        }
+        long  check = db.delete("Room","id=?",new String[]{String.valueOf(id)});
+        if(check==-1){
+            return  0 ;
+        }
+        return 1 ;
     }
 }

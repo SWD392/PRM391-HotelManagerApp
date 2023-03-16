@@ -75,7 +75,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.roomViewHolder
     @Override
     public void onBindViewHolder(@NonNull roomViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Room room=list.get(position);
-        holder.item_phong_ten.setText("Phòng: "+room.getName());
+        holder.item_phong_ten.setText("Room: "+room.getName());
 
         roomTypeDao =new RoomTypeDao(context);
         listRoomType = roomTypeDao.getListRoomType();
@@ -99,54 +99,44 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.roomViewHolder
 
 ///delete
         RoomDao dao = new RoomDao(context);
-//        holder. imageView. setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder builder= new AlertDialog.Builder(context);
-//                builder.setTitle("Bạn có chắc muốn xóa ?");
-//                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        int check = dao.delete(list.get(holder.getAdapterPosition()).getId());
-//                        switch (check){
-//                            case  1 :
-//                                list.clear();
-//                                list.addAll(dao.getAll());
-//                                notifyDataSetChanged();
-//                                Toast.makeText(context,"Xóa thành công",Toast.LENGTH_SHORT).show();
-//                                break;
-//                            case -1:
-//                                Toast.makeText(context,"Không thể xóa vì có khách hàng trong hóa đơn",Toast.LENGTH_SHORT).show();
-//                                break;
-//                            case 0 :
-//                                Toast.makeText(context,"Xóa không thành công",Toast.LENGTH_SHORT).show();
-//                                break;
-//                            default:
-//                                break;
-//                        }
-//
-//                    }
-//                });
-//                builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        dialogInterface.cancel();
-//                    }
-//                });
-//                builder.show();
-//            }
-//        });
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder= new AlertDialog.Builder(context);
+                builder.setTitle("Are you sure to delete ?");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        int check = dao.delete(list.get(holder.getAdapterPosition()).getId());
+                        switch (check){
+                            case  1 :
+                                list.clear();
+                                list.addAll(dao.getListRoom());
+                                notifyDataSetChanged();
+                                Toast.makeText(context,"Delete Sucsess",Toast.LENGTH_SHORT).show();
+                                break;
+                            case -1:
+                                Toast.makeText(context,"Can't delete because have customer in bill",Toast.LENGTH_SHORT).show();
+                                break;
+                            case 0 :
+                                Toast.makeText(context,"Delete Fail",Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                break;
+                        }
 
-//        holder.btn_datphong.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    fragmentHoaDon.openDialogHN(context,0);
-//                }catch (Exception e){
-//                    Log.d(TAG, "onClick dat phong: error "+ e);
-//                }
-//            }
-//        });
+                    }
+                });
+                builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                builder.show();
+            }
+        });
+
 
 
 
@@ -198,30 +188,30 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.roomViewHolder
                     }
                 });
 ///Update
-//                dialog_btn_themphong.setText("Cập nhật");
-//                dialog_btn_themphong.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        if (dialog_ed_tenphong.getText().length() == 0) {
-//                            Toast.makeText(context, "Không được để trống", Toast.LENGTH_SHORT).show();
-//                        } else {
-//
-//                            room.setName(dialog_ed_tenphong.getText().toString());
-//                            room.setRoom_type_id(loaiPhong);
-//                            room.setPrice(Integer.parseInt(dialog_ed_giaphong.getText().toString()));
-//                            room.setStatus(0);
-//                            if (dao.update(phong) > 0) {
-//                                Toast.makeText(context, "sửa phòng thành công", Toast.LENGTH_SHORT).show();
-//                                list.clear();
-//                                list.addAll(dao.getAll());
-//                                notifyDataSetChanged();
-//                                dialog.dismiss();
-//                            } else {
-//                                Toast.makeText(context, "sửa phòng thất bại", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    }
-//                });
+                btn_add.setText("Cập nhật");
+                btn_add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (room_name.getText().length() == 0) {
+                            Toast.makeText(context, "Must fill all", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            room.setName(room_name.getText().toString());
+                            room.setRoomTypeId(roomType2);
+                            room.setPrice(Integer.parseInt(room_price.getText().toString()));
+                            room.setStatus(0);
+                            if (dao.update(room) > 0) {
+                                Toast.makeText(context, "Update Succsess", Toast.LENGTH_SHORT).show();
+                                list.clear();
+                                list.addAll(dao.getListRoom());
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(context, "Update Fail", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
                 btn_cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
