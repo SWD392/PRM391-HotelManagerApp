@@ -11,13 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.final_project.R;
+import com.example.final_project.dao.RoomTypeDao;
 import com.example.final_project.entity.Room;
 
 import java.util.List;
 
 public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
+    RoomTypeDao roomTypeDao;
     public RoomSpinnerAdapter(@NonNull Context context, int resource, @NonNull List<Room> objects) {
         super(context, resource, objects);
+        roomTypeDao = new RoomTypeDao(context);
     }
 
     @NonNull
@@ -31,7 +34,7 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
         if (room != null) {
             tvRoom.setText("Room: " + room.getName());
             //todo: tìm tên room type, tạm thời chỉ set type_id
-            tvRoomType.setText("Type: " + room.getRoomTypeId());
+            tvRoomType.setText("Type: " + roomTypeDao.getID(room.getRoomTypeId()+"").getName());
         }
         return convertView;
     }
@@ -45,7 +48,7 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
         Room room = this.getItem(position);
         if (room != null) {
             tvRoom.setText("Room: " + room.getName());
-            tvRoomType.setText("Type: " + room.getRoomTypeId());
+            tvRoomType.setText("Type: " + roomTypeDao.getID(room.getRoomTypeId()+"").getName());
 
         }
         return convertView;

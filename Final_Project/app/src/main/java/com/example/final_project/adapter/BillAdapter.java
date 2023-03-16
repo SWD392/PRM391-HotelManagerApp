@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.final_project.R;
 import com.example.final_project.dao.BillDAO;
+import com.example.final_project.dao.RoomDao;
+import com.example.final_project.dao.RoomTypeDao;
 import com.example.final_project.entity.Bill;
 
 import java.text.SimpleDateFormat;
@@ -32,7 +34,9 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
     private List<Bill> billList;
 
     private Context context;
+    BillDAO billDAO;
 
+    RoomDao roomDao;
     public BillAdapter(List<Bill> billList, Context context) {
         this.billList = billList;
         this.context = context;
@@ -48,12 +52,13 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         return new BillViewHolder(view);
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint({"ResourceAsColor", "NotifyDataSetChanged"})
     @Override
     public void onBindViewHolder(@NonNull BillViewHolder holder, int position) {
         Bill bill = billList.get(position);
-        BillDAO billDAO = new BillDAO(context);
-        holder.roomName.setText(bill.getRoomId() + "");
+        billDAO = new BillDAO(context);
+        roomDao = new RoomDao(context);
+        holder.roomName.setText(roomDao.getRoomById(bill.getRoomId()).get(0).getName());
         holder.customerName.setText(bill.getCustomerId() + "");
         holder.fromDate.setText(bill.getFromDate());
         holder.endDate.setText(bill.getEndDate());
@@ -102,6 +107,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
                             .stream()
                             .filter(billEntity -> billEntity.getStatus() == 1)
                             .collect(Collectors.toList());
+                    notifyDataSetChanged();
                     dialog.cancel();
                 } else {
                     Toast.makeText(context, "Cannot delete bill", Toast.LENGTH_SHORT).show();
@@ -122,7 +128,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
             Button cancel = dialog.findViewById(R.id.cancel_btn);
 
             confirmBtn.setOnClickListener(cfButton -> {
-                //todo
                 if (bill.getStatus() == 1) {
                     bill.setStatus(2);
                     if (billDAO.update(bill)) {
@@ -201,10 +206,10 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         startDateDetail.setText(bill.getFromDate());
         endDateDetail.setText(bill.getEndDate());
         customerDetail.setText(bill.getCustomerId() + "");
-        roomDetail.setText(bill.getRoomId() + "");
+        roomDetail.setText(roomDao.getRoomById(bill.getRoomId()).get(0).getName());
         noteDetail.setText(bill.getNote());
         //todo: Sửa thành status
-        statusDetail.setText(bill.getStatus() + "");
+        statusDetail.setText(getStatus(bill.getStatus() ));
         totalBillDetail.setText(bill.getBillTotal() + "");
         doneViewBtn.setOnClickListener(button -> {
             dialog.cancel();
@@ -216,6 +221,18 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
     @Override
     public int getItemCount() {
         return billList.size();
+    }
+
+    private String getStatus(int statusId) {
+        switch (statusId) {
+            case 1:
+                return "NOT CHECK IN";
+            case 2:
+                return "CHECKED IN";
+            case 3:
+            default:
+                return "CHECKED OUT";
+        }
     }
 
     public class BillViewHolder extends RecyclerView.ViewHolder {
@@ -245,7 +262,5 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
             billStatus = view.findViewById(R.id.tv_bill_status);
             cancelBillButton = view.findViewById(R.id.cancel_bill_btn);
         }
-
-
     }
 }
