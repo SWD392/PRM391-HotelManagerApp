@@ -48,7 +48,7 @@ public class CustomerFragment extends Fragment {
     CustomerDAO dao ;
     CustomerAdapter adapter;
     List<Customer> list ;
-    FloatingActionButton btnADD;
+    Button btnADD;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     SearchView searchView;
     @Override
