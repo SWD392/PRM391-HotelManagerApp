@@ -11,6 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Final_Project"
         tools:targetApi="31" >
+
+
+        <activity
+            android:name=".AddServiceBillActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            />
+
         <activity
             android:name=".UpdateServActivity"
             android:exported="false"

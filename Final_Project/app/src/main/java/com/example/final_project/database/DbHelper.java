@@ -10,8 +10,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "Hotel_Management";
 
-    static final int DATABASE_VERSION =
-            1;
+    static final int DATABASE_VERSION = 1;
 
 
     public DbHelper(Context context) {
@@ -70,16 +69,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
         String createTableBill = "create table Bill (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "manager_id TEXT REFERENCES UserAccount(id)," +
+                "manager_id INTEGER REFERENCES UserAccount(id)," +
                 "customer_id INTEGER REFERENCES Customer(id)," +
                 "room_id INTEGER REFERENCES Room(id)," +
-                "start_date DATE NOT NULL," +
+                "from_date DATE NOT NULL," +
                 "end_date DATE NOT NULL," +
                 "status INTEGER NOT NULL," +
                 "note TEXT ," +
                 "bill_date DATE NOT NULL," +
-                "service_total INTERGER NOT NULL," +
-                "room_total INTERGER NOT NULL," +
+                "service_price INTERGER NOT NULL," +
+                "room_price INTERGER NOT NULL," +
                 "bill_total INTEGER NOT NULL)";
         db.execSQL(createTableBill);
     }
