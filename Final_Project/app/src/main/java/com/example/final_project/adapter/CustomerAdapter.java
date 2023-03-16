@@ -46,7 +46,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         this.list=filteredList;
         notifyDataSetChanged();
     }
-
     @NonNull
     @Override
     public CustomerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,14 +53,12 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         View view = inflater.inflate(R.layout.item_customer,parent,false);
         return new CustomerViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull CustomerViewHolder holder, int position) {
         Customer cus = list.get(position);
         holder.txtName.setText("Customer : "+list.get(position).getName());
         holder.txtPhone.setText("PhoneNumber : "+list.get(position).getPhone());
         holder.txtBirtday.setText("Birthday : "+list.get(position).getBirthday());
-
         Calendar calendar =Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         CustomerDAO dao = new CustomerDAO(context);
@@ -81,7 +78,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
                 windowacc.gravity = Gravity.NO_GRAVITY ;
                 window.setAttributes(windowacc);
                 Button btnCancel = dialog.findViewById(R.id.btnCancel);
-
                 Button btnAdd = dialog.findViewById(R.id.btnAdd);
                 btnAdd.setText("Update");
                 EditText ed_name = dialog.findViewById(R.id.edName);
@@ -115,9 +111,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
                         if(ed_name.getText().length()==0||
                                 ed_phone.getText().length()==0||
                                 ed_birthday.getText().length()==0){
-                            Toast.makeText(context,"Không được để trống",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"Can't be left blank",Toast.LENGTH_SHORT).show();
                         }else if(!(isValidFormat("dd/MM/yyyy",ed_birthday.getText().toString()))){
-                            Toast.makeText(context,"Không đúng định dạng ngày",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"Incorrect date format",Toast.LENGTH_SHORT).show();
                         }
                         else {
                             cus.setName(ed_name.getText().toString());
@@ -125,12 +121,12 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
                             cus.setBirthday(ed_birthday.getText().toString());
                             long res = dao.update(cus);
                             if (res>0){
-                                Toast.makeText(context,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context,"Update Successful !",Toast.LENGTH_SHORT).show();
                                 list.clear();
                                 list.addAll(dao.getListCustomer());
                                 notifyDataSetChanged();
                             }else {
-                                Toast.makeText(context,"Cập nhật thất bại ",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context,"Update Fail !",Toast.LENGTH_SHORT).show();
                             }
                             dialog.dismiss();
                         }
@@ -149,7 +145,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder= new AlertDialog.Builder(context);
-                builder.setTitle("Bạn có chắc muốn xóa ?");
+                builder.setTitle("Are you sure you want to delete?");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -188,7 +184,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
     public int getItemCount() {
         return list.size();
     }
-
     public  class CustomerViewHolder extends RecyclerView.ViewHolder{
         TextView txtName , txtPhone , txtBirtday ;
         ImageView imgDel;

@@ -50,7 +50,7 @@ public class CustomerFragment extends Fragment {
     List<Customer> list ;
     FloatingActionButton btnADD;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    private SearchView searchView;
+    SearchView searchView;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -69,11 +69,11 @@ public class CustomerFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                FinterList(newText);
+                SearchList(newText);
                 return true;
             }
         });
-        //
+
         adapter = new CustomerAdapter(getContext(),list);
         listCus.setAdapter(adapter);
         btnADD = view.findViewById(R.id.addCustomer);
@@ -93,7 +93,6 @@ public class CustomerFragment extends Fragment {
                 WindowManager.LayoutParams windowacc = window.getAttributes();
                 windowacc.gravity = Gravity.NO_GRAVITY ;
                 window.setAttributes(windowacc);
-
                 Button btnCancel = dialog.findViewById(R.id.btnCancel);
                 Button btnAdd = dialog.findViewById(R.id.btnAdd);
                 EditText ed_name = dialog.findViewById(R.id.edName);
@@ -169,28 +168,23 @@ public class CustomerFragment extends Fragment {
         }
         return date != null;
     }
-    private void FinterList(String text) {
+    private void SearchList(String text) {
         ArrayList<Customer> filteredList=new ArrayList<>();
-//        list=dao.getAll();
-
-
-        for (Customer khachHang: list){
-            if (khachHang.getName().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(khachHang);
+        list=dao.getListCustomer();
+        for (Customer cus: list){
+            if (cus.getName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(cus);
             }
 
         }
         if (filteredList.isEmpty()){
-            Toast.makeText(this.getContext(), "no data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getContext(), "No Customer name such as "+text, Toast.LENGTH_SHORT).show();
         }else {
             adapter.setFilteredList(filteredList);
         }
     }
     public boolean checkPhone(String str){
-        // Bieu thuc chinh quy mo ta dinh dang so dien thoai
         String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
-
-        // Kiem tra dinh dang
         boolean kt = str.matches(reg);
 
         if (kt == false) {

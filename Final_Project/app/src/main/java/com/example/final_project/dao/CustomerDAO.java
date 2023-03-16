@@ -39,10 +39,6 @@ public class CustomerDAO {
         String query = "SELECT * FROM Customer ";
         return getDaTa(query);
     }
-    public  List<Customer> searchCustomer(String name){
-        String query = "SELECT * FROM Customer where name like "+name;
-        return getDaTa(query);
-    }
     public long addCustomer(Customer customer){
         ContentValues values=new ContentValues();
         values.put("name",customer.getName());
@@ -51,10 +47,10 @@ public class CustomerDAO {
         return db.insert("Customer",null,values);
     }
     public int deleteCus(int id){
-//        Cursor cursor = db.rawQuery("SELECT * FROM Bills WHERE guest_id = ?",new String[]{String.valueOf(id)});
-//        if (cursor.getCount()!=0){
-//            return -1 ;
-//        }
+        Cursor cursor = db.rawQuery("SELECT * FROM Bill WHERE customer_id = ?",new String[]{String.valueOf(id)});
+        if (cursor.getCount()!=0){
+            return -1 ;
+        }
         long  check = db.delete("Customer","id=?",new String[]{String.valueOf(id)});
         if(check==-1){
             return  0 ;
