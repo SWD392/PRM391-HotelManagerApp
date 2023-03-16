@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,15 +138,20 @@ public class RoomListFragment extends Fragment {
                     room.setRoomTypeId(roomType);
                     room.setPrice(Integer.parseInt(room_price.getText().toString()));
                     room.setStatus(0);
-                    if (roomDao.insertRoom(room) > 0) {
-                        Toast.makeText(getContext(), "Thêm phòng thành công", Toast.LENGTH_SHORT).show();
-                        list.clear();
-                        list.addAll(roomDao.getListRoom());
-                        roomAdapter.notifyDataSetChanged();
-                        dialog.dismiss();
-                    } else {
-                        Toast.makeText(getContext(), "Thêm phòng thất bại", Toast.LENGTH_SHORT).show();
-                    }
+
+//                    if (roomDao.insertRoom(room) > 0) {
+                    roomDao.insert(room_name.getText().toString(), Integer.parseInt(room_price.getText().toString()), 1, roomType);
+                    Toast.makeText(getContext(), "Thêm phòng thành công", Toast.LENGTH_SHORT).show();
+                    list.clear();
+                    list.addAll(roomDao.getListRoom());
+                    Log.d("Name", room_name.getText().toString());
+                    Log.d("Type", String.valueOf(roomType));
+                    Log.d("Price", room_price.getText().toString());
+                    roomAdapter.notifyDataSetChanged();
+                    dialog.dismiss();
+//                    } else {
+//                        Toast.makeText(getContext(), "Thêm phòng thất bại", Toast.LENGTH_SHORT).show();
+//                    }
                 }
             }
         });

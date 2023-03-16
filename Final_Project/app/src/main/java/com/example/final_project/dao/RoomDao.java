@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.final_project.database.DbHelper;
 import com.example.final_project.entity.Room;
 import com.example.final_project.entity.RoomType;
+import com.example.final_project.entity.ServiceType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,22 +43,44 @@ public class RoomDao {
         return list;
     }
 
-    public List<Room> getListRoom() {
-        String query = "SELECT * FROM Room ";
+    public Room getID(String id){
+        String sql="select * from Room where id=?";
+        List<Room> list = getDaTa(sql,id);
+        if (!list.isEmpty()) {
+            return list.get(0);
+        } else {
+            return null;
+        }
+    }
+    public  List<Room> getListRoom(){
+        String query = "SELECT * FROM Room";
         return getDaTa(query);
     }
+    public long insertRoom(Room room){
+        ContentValues values=new ContentValues();
+        values.put("room_type_id",room.getRoomTypeId());
+        values.put("name",room.getName());
+        values.put("price",room.getPrice());
+        values.put("status_id",room.getStatus());
 
-    public long insertRoom(Room room) {
+
+        return db.insert("Room",null,values);
+
+    }
+
+    public void insert(String name, int price, int status, int room_type_id) {
+
+        // calling a method to get writable database.
         ContentValues values = new ContentValues();
-        values.put("status_id", room.getStatus());
-        values.put("name", room.getName());
-        values.put("price", room.getPrice());
-        values.put("room_category_id", room.getRoomTypeId());
-        return db.insert("Room", null, values);
-    }
 
-    public List<Room> getRoomById(int id) {
-        String query = "SELECT * FROM Room where id = " + id;
-        return getDaTa(query);
+
+        values.put("name", name);
+        values.put("price", price);
+        values.put("status_id", status);
+        values.put("room_type_id", room_type_id);
+        // on below line we are calling a update method to update our database and passing our values.
+        // and we are comparing it with name of our course which is stored in original name variable.
+        db.insert("Room",null, values);
+
     }
 }

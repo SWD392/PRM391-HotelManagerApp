@@ -23,6 +23,7 @@ import com.example.final_project.dao.BillDAO;
 import com.example.final_project.dao.RoomDao;
 import com.example.final_project.dao.RoomTypeDao;
 import com.example.final_project.entity.Bill;
+import com.example.final_project.entity.Room;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -58,12 +59,16 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         Bill bill = billList.get(position);
         billDAO = new BillDAO(context);
         roomDao = new RoomDao(context);
-        holder.roomName.setText(roomDao.getRoomById(bill.getRoomId()).get(0).getName());
-        holder.customerName.setText(bill.getCustomerId() + "");
-        holder.fromDate.setText(bill.getFromDate());
-        holder.endDate.setText(bill.getEndDate());
-        holder.totalBill.setText(bill.getBillTotal() + "");
-        holder.bill = bill;
+
+        Room room = roomDao.getID(String.valueOf(bill.getRoomId()));
+        if(room != null && room.getName() != null){
+            holder.roomName.setText(room.getName());
+            holder.customerName.setText(bill.getCustomerId() + "");
+            holder.fromDate.setText(bill.getFromDate());
+            holder.endDate.setText(bill.getEndDate());
+            holder.totalBill.setText(bill.getBillTotal() + "");
+            holder.bill = bill;
+        }
 
         switch (bill.getStatus()) {
             case 1:
@@ -206,7 +211,9 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         startDateDetail.setText(bill.getFromDate());
         endDateDetail.setText(bill.getEndDate());
         customerDetail.setText(bill.getCustomerId() + "");
-        roomDetail.setText(roomDao.getRoomById(bill.getRoomId()).get(0).getName());
+        if(roomDao.getID(String.valueOf(bill.getRoomId())).getName() != null){
+            roomDetail.setText(roomDao.getID(String.valueOf(bill.getRoomId())).getName());
+        }
         noteDetail.setText(bill.getNote());
         //todo: Sửa thành status
         statusDetail.setText(getStatus(bill.getStatus() ));

@@ -21,16 +21,7 @@ public class ServiceFragment extends Fragment {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
 
-    public ServiceFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static ServiceFragment newInstance(String param1, String param2) {
-        ServiceFragment fragment = new ServiceFragment();
-
-        return fragment;
-    }
+    private View mView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,21 +31,15 @@ public class ServiceFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.service_fragment, container, false);
+        mView = inflater.inflate(R.layout.service_fragment, container, false);
 
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mTabLayout = view.findViewById(R.id.id_tablayout_service);
-        mViewPager = view.findViewById(R.id.id_viewpager_service);
-        ServiceViewPagerAdapter serviceViewPagerAdapter = new ServiceViewPagerAdapter(getParentFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        mTabLayout = mView.findViewById(R.id.id_tablayout_service);
+        mViewPager = mView.findViewById(R.id.id_viewpager_service);
+        ServiceViewPagerAdapter serviceViewPagerAdapter = new ServiceViewPagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         mViewPager.setAdapter(serviceViewPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-
-
+        return mView;
     }
 
 }

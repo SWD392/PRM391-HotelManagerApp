@@ -88,4 +88,10 @@ public class BillDAO {
         }
         return billList;
     }
+
+    public Bill getId(String id){
+        String sql = "SELECT * FROM Bill WHERE id=?";
+        List<Bill> list=getData(sql,id);
+        return list.get(0);
+    }
 }

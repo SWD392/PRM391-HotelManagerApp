@@ -44,10 +44,11 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.roomViewHolder
     private RoomTypeDao roomTypeDao;
     private Spinner spn;
 
+
     SpinnerRoomType spinnerRoomType;
     Button btn_cancel,btn_add;
     List<RoomType> listRoomType;
-RoomType roomType;
+    RoomType roomType;
 
     int roomType2;
 
@@ -65,8 +66,8 @@ RoomType roomType;
         public roomViewHolder(@NonNull View itemView) {
             super(itemView);
             item_phong_ten = itemView.findViewById(R.id.room_name);
-            item_phong_giaphong = itemView.findViewById(R.id.room_type);
-            item_phong_loaiphong = itemView.findViewById(R.id.room_price);
+            item_phong_loaiphong = itemView.findViewById(R.id.room_type);
+            item_phong_giaphong = itemView.findViewById(R.id.room_price);
             imageView = itemView.findViewById(R.id.id_delete);
         }
     }
@@ -74,20 +75,30 @@ RoomType roomType;
     @Override
     public void onBindViewHolder(@NonNull roomViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Room room=list.get(position);
-        holder.item_phong_ten.setText("Room: "+room.getName());
+        holder.item_phong_ten.setText("Phòng: "+room.getName());
 
         roomTypeDao =new RoomTypeDao(context);
         listRoomType = roomTypeDao.getListRoomType();
-        try {
-            roomType = roomTypeDao.getID(String.valueOf(room.getRoomTypeId()));
-        }catch (Exception e){
-            Log.d("Error", "onBindViewHolder room adapter");
+//        try {
+//            roomType = roomTypeDao.getID(String.valueOf(room.getRoomTypeId()));
+//        }catch (Exception e){
+//            Log.d("zzzz", "onBindViewHolder phong adapter");
+//        }
+//        holder.item_phong_loaiphong.setText("Loại phòng: \n"+roomType.getName());
+        if (roomTypeDao.getID(String.valueOf(room.getRoomTypeId())) != null){
+            try {
+                roomType = roomTypeDao.getID(String.valueOf(room.getRoomTypeId()));
+            }catch (Exception e){
+                Log.d("zzzz", "onBindViewHolder phong adapter");
+            }
+            holder.item_phong_loaiphong.setText("Loại phòng: \n"+roomType.getName());
+            holder.item_phong_giaphong.setText("Giá phòng: \n"+room.getPrice()+" VNĐ");
         }
-        holder.item_phong_loaiphong.setText("Room Type: \n"+roomType.getName());
 
-        holder.item_phong_giaphong.setText("Price: \n"+room.getPrice()+" VNĐ");
+
+
 ///delete
-        RoomDao dao = new RoomDao( context);
+        RoomDao dao = new RoomDao(context);
 //        holder. imageView. setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

@@ -17,7 +17,7 @@
         android:orientation="horizontal"
         >
         <LinearLayout
-            android:id="@+id/item_service_info"
+            android:id="@+id/item_service_edit"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
