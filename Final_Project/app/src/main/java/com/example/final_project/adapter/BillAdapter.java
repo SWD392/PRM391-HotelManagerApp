@@ -38,6 +38,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
     BillDAO billDAO;
 
     RoomDao roomDao;
+
     public BillAdapter(List<Bill> billList, Context context) {
         this.billList = billList;
         this.context = context;
@@ -61,7 +62,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         roomDao = new RoomDao(context);
 
         Room room = roomDao.getID(String.valueOf(bill.getRoomId()));
-        if(room != null && room.getName() != null){
+        if (room != null && room.getName() != null) {
             holder.roomName.setText(room.getName());
             holder.customerName.setText(bill.getCustomerId() + "");
             holder.fromDate.setText(bill.getFromDate());
@@ -211,12 +212,12 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         startDateDetail.setText(bill.getFromDate());
         endDateDetail.setText(bill.getEndDate());
         customerDetail.setText(bill.getCustomerId() + "");
-        if(roomDao.getID(String.valueOf(bill.getRoomId())).getName() != null){
+        if (roomDao.getID(String.valueOf(bill.getRoomId())).getName() != null) {
             roomDetail.setText(roomDao.getID(String.valueOf(bill.getRoomId())).getName());
         }
         noteDetail.setText(bill.getNote());
         //todo: Sửa thành status
-        statusDetail.setText(getStatus(bill.getStatus() ));
+        statusDetail.setText(getStatus(bill.getStatus()));
         totalBillDetail.setText(bill.getBillTotal() + "");
         doneViewBtn.setOnClickListener(button -> {
             dialog.cancel();
