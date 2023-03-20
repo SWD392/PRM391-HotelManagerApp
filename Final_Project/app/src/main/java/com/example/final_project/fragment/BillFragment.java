@@ -32,6 +32,7 @@ import com.example.final_project.adapter.CustomerSpinnerAdapter;
 import com.example.final_project.adapter.RoomSpinnerAdapter;
 import com.example.final_project.adapter.StatusSpinnerAdapter;
 import com.example.final_project.dao.BillDAO;
+import com.example.final_project.dao.CustomerDAO;
 import com.example.final_project.dao.RoomDao;
 import com.example.final_project.entity.Bill;
 import com.example.final_project.entity.Customer;
@@ -52,6 +53,8 @@ public class BillFragment extends Fragment {
     private BillDAO billDao;
 
     private RoomDao roomDao;
+
+    private CustomerDAO customerDAO;
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private StatusSpinnerAdapter statusAdapter;
@@ -108,6 +111,7 @@ public class BillFragment extends Fragment {
     private void openAddBillDialog(View view) {
         billDao = new BillDAO(view.getContext());
         roomDao = new RoomDao(view.getContext());
+        customerDAO = new CustomerDAO(view.getContext());
         Dialog dialog = new Dialog(view.getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bill_dialog);
@@ -178,7 +182,7 @@ public class BillFragment extends Fragment {
         });
 
         //List spinner customer execute
-        customerAdapter = new CustomerSpinnerAdapter(view.getContext(), R.layout.item_customer_spinner, getListCustomer());
+        customerAdapter = new CustomerSpinnerAdapter(view.getContext(), R.layout.item_customer_spinner, getListCustomer(customerDAO));
         spnCustomer.setAdapter(customerAdapter);
 
         findRoom.setOnClickListener(button -> {
@@ -203,7 +207,7 @@ public class BillFragment extends Fragment {
         spnCustomer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                customerId = getListCustomer().get(position).getId();
+                customerId = getListCustomer(customerDAO).get(position).getId();
             }
 
             @Override
@@ -332,7 +336,6 @@ public class BillFragment extends Fragment {
     }
 
     private List<RoomStatus> getListStatus() {
-        //todo: Trả về list các status có trong db (tạm thời fix cứng data)
         List<RoomStatus> roomStatuses = new ArrayList<>();
         roomStatuses.add(new RoomStatus(1, "Not Check In"));
         roomStatuses.add(new RoomStatus(2, "Checked In"));
@@ -340,22 +343,16 @@ public class BillFragment extends Fragment {
         return roomStatuses;
     }
 
-    private List<Customer> getListCustomer() {
-        List<Customer> customers = new ArrayList<>();
-        customers.add(new Customer(1, "A", "0123", Calendar.getInstance().toString()));
-        customers.add(new Customer(2, "B", "01234", Calendar.getInstance().toString()));
-        customers.add(new Customer(3, "C", "01235", Calendar.getInstance().toString()));
-        customers.add(new Customer(4, "D", "01236", Calendar.getInstance().toString()));
-        return customers;
+    private List<Customer> getListCustomer(CustomerDAO customerDAO) {
+//        List<Customer> customers = new ArrayList<>();
+//        customers.add(new Customer(1, "A", "0123", Calendar.getInstance().toString()));
+//        customers.add(new Customer(2, "B", "01234", Calendar.getInstance().toString()));
+//        customers.add(new Customer(3, "C", "01235", Calendar.getInstance().toString()));
+//        customers.add(new Customer(4, "D", "01236", Calendar.getInstance().toString()));
+        return customerDAO.getListCustomer();
     }
 
     private List<Room> getRooms(RoomDao roomDao) {
-//        List<Room> rooms = new ArrayList<>();
-//        rooms.add(new Room(1, "1", 1, 100, 1));
-//        rooms.add(new Room(2, "2", 2, 100, 1));
-//        rooms.add(new Room(3, "3", 3, 100, 1));
-//        rooms.add(new Room(4, "4", 1, 100, 1));
-//        return rooms;
         return roomDao.getListRoom();
     }
 }

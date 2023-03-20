@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.final_project.R;
 import com.example.final_project.dao.BillDAO;
+import com.example.final_project.dao.CustomerDAO;
 import com.example.final_project.dao.RoomDao;
 import com.example.final_project.dao.RoomTypeDao;
 import com.example.final_project.entity.Bill;
@@ -38,6 +39,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
     BillDAO billDAO;
 
     RoomDao roomDao;
+
+    CustomerDAO customerDAO;
 
     public BillAdapter(List<Bill> billList, Context context) {
         this.billList = billList;
@@ -60,11 +63,12 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         Bill bill = billList.get(position);
         billDAO = new BillDAO(context);
         roomDao = new RoomDao(context);
+        customerDAO = new CustomerDAO(context);
 
         Room room = roomDao.getID(String.valueOf(bill.getRoomId()));
-        if (room != null && room.getName() != null) {
+        if(room != null && room.getName() != null){
             holder.roomName.setText(room.getName());
-            holder.customerName.setText(bill.getCustomerId() + "");
+            holder.customerName.setText(customerDAO.getID(bill.getCustomerId()+"").getName());
             holder.fromDate.setText(bill.getFromDate());
             holder.endDate.setText(bill.getEndDate());
             holder.totalBill.setText(bill.getBillTotal() + "");
@@ -211,8 +215,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
 
         startDateDetail.setText(bill.getFromDate());
         endDateDetail.setText(bill.getEndDate());
-        customerDetail.setText(bill.getCustomerId() + "");
-        if (roomDao.getID(String.valueOf(bill.getRoomId())).getName() != null) {
+        customerDetail.setText(customerDAO.getID(bill.getCustomerId()+"").getName());
+        if(roomDao.getID(String.valueOf(bill.getRoomId())).getName() != null){
             roomDetail.setText(roomDao.getID(String.valueOf(bill.getRoomId())).getName());
         }
         noteDetail.setText(bill.getNote());
