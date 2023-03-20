@@ -131,7 +131,7 @@ public class RoomListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (room_name.getText().length() == 0) {
-                    Toast.makeText(getContext(), "Không được để trống", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Must Fill All", Toast.LENGTH_SHORT).show();
                 } else {
                     room = new Room();
                     room.setName(room_name.getText().toString());
@@ -141,7 +141,7 @@ public class RoomListFragment extends Fragment {
 
 //                    if (roomDao.insertRoom(room) > 0) {
                     roomDao.insert(room_name.getText().toString(), Integer.parseInt(room_price.getText().toString()), 1, roomType);
-                    Toast.makeText(getContext(), "Thêm phòng thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Add Success", Toast.LENGTH_SHORT).show();
                     list.clear();
                     list.addAll(roomDao.getListRoom());
                     Log.d("Name", room_name.getText().toString());
