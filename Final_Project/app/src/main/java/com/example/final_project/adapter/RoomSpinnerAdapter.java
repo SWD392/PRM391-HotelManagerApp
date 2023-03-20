@@ -1,5 +1,6 @@
 package com.example.final_project.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +19,13 @@ import java.util.List;
 
 public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
     RoomTypeDao roomTypeDao;
+
     public RoomSpinnerAdapter(@NonNull Context context, int resource, @NonNull List<Room> objects) {
         super(context, resource, objects);
         roomTypeDao = new RoomTypeDao(context);
     }
 
+    @SuppressLint("ViewHolder")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -33,8 +36,7 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
         Room room = this.getItem(position);
         if (room != null) {
             tvRoom.setText("Room: " + room.getName());
-            //todo: tìm tên room type, tạm thời chỉ set type_id
-            tvRoomType.setText("Type: " + roomTypeDao.getID(room.getRoomTypeId()+"").getName());
+            tvRoomType.setText("Type: " + roomTypeDao.getID(room.getRoomTypeId() + "").getName());
         }
         return convertView;
     }
@@ -48,7 +50,7 @@ public class RoomSpinnerAdapter extends ArrayAdapter<Room> {
         Room room = this.getItem(position);
         if (room != null) {
             tvRoom.setText("Room: " + room.getName());
-            tvRoomType.setText("Type: " + roomTypeDao.getID(room.getRoomTypeId()+"").getName());
+            tvRoomType.setText("Type: " + roomTypeDao.getID(room.getRoomTypeId() + "").getName());
 
         }
         return convertView;
