@@ -79,20 +79,15 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.roomViewHolder
 
         roomTypeDao =new RoomTypeDao(context);
         listRoomType = roomTypeDao.getListRoomType();
-//        try {
-//            roomType = roomTypeDao.getID(String.valueOf(room.getRoomTypeId()));
-//        }catch (Exception e){
-//            Log.d("zzzz", "onBindViewHolder phong adapter");
-//        }
-//        holder.item_phong_loaiphong.setText("Loại phòng: \n"+roomType.getName());
+
         if (roomTypeDao.getID(String.valueOf(room.getRoomTypeId())) != null){
             try {
                 roomType = roomTypeDao.getID(String.valueOf(room.getRoomTypeId()));
             }catch (Exception e){
                 Log.d("zzzz", "onBindViewHolder phong adapter");
             }
-            holder.item_phong_loaiphong.setText("Loại phòng: \n"+roomType.getName());
-            holder.item_phong_giaphong.setText("Giá phòng: \n"+room.getPrice()+" VNĐ");
+            holder.item_phong_loaiphong.setText("Room Type: \n"+roomType.getName());
+            holder.item_phong_giaphong.setText("Price: \n"+room.getPrice()+" VNĐ");
         }
 
 
@@ -188,7 +183,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RoomAdapter.roomViewHolder
                     }
                 });
 ///Update
-                btn_add.setText("Cập nhật");
+                btn_add.setText("Update");
                 btn_add.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
