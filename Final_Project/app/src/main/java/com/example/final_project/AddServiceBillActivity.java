@@ -71,7 +71,7 @@ public class AddServiceBillActivity extends AppCompatActivity {
         add_service_date = findViewById(R.id.add_service_date);
         add_service_total = findViewById(R.id.add_service_total);
         String datetime = sdf.format(c.getTime());
-        add_service_date.setText("Ngày tạo hóa đơn: "+datetime);
+        add_service_date.setText("Created date: "+datetime);
         add_service_quantity.setText("1");
         //Spinner
         typeServiceSpinnerAdapter = new TypeServiceSpinnerAdapter(this, (ArrayList<ServiceType>) typeServiceDAO.getAll());

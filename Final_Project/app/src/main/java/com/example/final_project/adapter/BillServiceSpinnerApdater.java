@@ -45,14 +45,14 @@ public class BillServiceSpinnerApdater extends ArrayAdapter<Bill> {
             tvfrom = holder.findViewById(R.id.item_spn_from);
             tvto = holder.findViewById(R.id.item_spn_to);
 
-            tvfrom.setText("Từ "+obj.getFromDate());
-            tvto.setText("đến "+obj.getEndDate());
+            tvfrom.setText("From "+obj.getFromDate());
+            tvto.setText("To "+obj.getEndDate());
 
             RoomDao roomDao = new RoomDao(context);
-            tvspnroomname.setText("Phòng: "+roomDao.getID(String.valueOf(obj.getRoomId())).getName());
+            tvspnroomname.setText("Room: "+roomDao.getID(String.valueOf(obj.getRoomId())).getName());
 
             CustomerDAO customerDAO = new CustomerDAO(context);
-            tvspncustomername.setText("KH: "+customerDAO.getID(String.valueOf(obj.getCustomerId())).getName());
+            tvspncustomername.setText("Customer: "+customerDAO.getID(String.valueOf(obj.getCustomerId())).getName());
 
 
         }
@@ -75,14 +75,15 @@ public class BillServiceSpinnerApdater extends ArrayAdapter<Bill> {
             tvfrom = holder.findViewById(R.id.item_spn_from);
             tvto = holder.findViewById(R.id.item_spn_to);
 
-            tvfrom.setText("Từ "+obj.getFromDate());
-            tvto.setText("đến "+obj.getEndDate());
+            tvfrom.setText("From "+obj.getFromDate());
+            tvto.setText("To "+obj.getEndDate());
 
             RoomDao roomDao = new RoomDao(context);
-            tvspnroomname.setText("Phòng: "+roomDao.getID(String.valueOf(obj.getRoomId())).getName());
+            tvspnroomname.setText("Room: "+roomDao.getID(String.valueOf(obj.getRoomId())).getName());
 
             CustomerDAO customerDAO = new CustomerDAO(context);
-            tvspncustomername.setText("KH: "+customerDAO.getID(String.valueOf(obj.getCustomerId())).getName());
+            tvspncustomername.setText("Customer: "+customerDAO.getID(String.valueOf(obj.getCustomerId())).getName());
+
 
 
         }

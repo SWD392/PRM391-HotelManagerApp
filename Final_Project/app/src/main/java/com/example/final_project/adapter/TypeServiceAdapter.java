@@ -30,7 +30,6 @@ public class TypeServiceAdapter extends RecyclerView.Adapter<TypeServiceAdapter.
     private Context context;
     private List<ServiceType> mListServiceType;
 
-    private Activity activity;
     private TypeServiceDAO typeServiceDAO;
     public TypeServiceAdapter(Context context, List<ServiceType> mListServiceType) {
         this.context = context;

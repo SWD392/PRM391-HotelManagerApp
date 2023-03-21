@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.final_project.AddServiceBillActivity;
 import com.example.final_project.R;
@@ -35,8 +36,9 @@ public class BillServiceFragment extends Fragment {
 
     private BillServiceAdapter billServiceAdapter;
 
+    List<String> error;
 
-
+    List<ServiceType> listTypeService;
     private Button addBillServicebtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +48,7 @@ public class BillServiceFragment extends Fragment {
         rcvBillService = view.findViewById(R.id.rcv_bill_service);
         BillServiceDAO billServiceDAO = new BillServiceDAO(getContext());
         List<ServiceBill> list = new ArrayList<>();
+        TypeServiceDAO typeServiceDAO = new TypeServiceDAO(getContext());
 //        list.add(new ServiceBill(1 , 1, 23000));
 //        list.add(new ServiceBill(2 , 2, 13000));
 //        list.add(new ServiceBill(1 , 2, 42000));
@@ -60,8 +63,19 @@ public class BillServiceFragment extends Fragment {
         addBillServicebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddServiceBillActivity.class);
-                startActivity(intent);
+                listTypeService = typeServiceDAO.getAll();
+                error = new ArrayList<>();
+                if(listTypeService.size() == 0){
+                    error.add("You haven't had service type yet");
+                }
+                if(error.isEmpty()){
+                    Intent intent = new Intent(getActivity(), AddServiceBillActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getActivity(),"" + error, Toast.LENGTH_SHORT).show();
+                    error = new ArrayList<>();
+                }
+
             }
         });
         return view;

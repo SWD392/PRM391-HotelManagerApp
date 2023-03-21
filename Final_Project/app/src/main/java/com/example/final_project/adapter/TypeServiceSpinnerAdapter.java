@@ -28,55 +28,35 @@ public class TypeServiceSpinnerAdapter extends ArrayAdapter<ServiceType> {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-//        View holder = convertView;
-//        if (holder==null){
-//            LayoutInflater inflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//
-//            holder = inflater.inflate(R.layout.service_type_spinner,null);
-//
-//        }
-//        final ServiceType obj = objects.get(position);
-//        if (obj != null){
-//            tvspntendv = holder.findViewById(R.id.item_spn_service_type);
-//            tvspntendv.setText(obj.getName());
-//        }
-//        return holder;
-        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_type_spinner, parent,false);
-        tvspntendv = convertView.findViewById(R.id.item_spn_service_type);
+        View holder = convertView;
+        if (holder == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        ServiceType serviceType = this.getItem(position);
+            holder = inflater.inflate(R.layout.service_type_spinner, null);
 
-        if(serviceType != null){
-            tvspntendv.setText(serviceType.getName());
         }
-
-        return convertView;
+        final ServiceType obj = objects.get(position);
+        if (obj != null) {
+            tvspntendv = holder.findViewById(R.id.item_spn_service_type);
+            tvspntendv.setText(obj.getName());
+        }
+        return holder;
     }
 
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//        View holder = convertView;
-//        if (holder==null){
-//            LayoutInflater inflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//
-//            holder = inflater.inflate(R.layout.service_type_spinner,null);
-//
-//        }
-//        final ServiceType obj = objects.get(position);
-//        if (obj != null){
-//            tvspntendv = holder.findViewById(R.id.item_spn_service_type);
-//            tvspntendv.setText(obj.getName());
-//        }
-//        return holder;
-        convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_type_spinner, parent,false);
-        tvspntendv = convertView.findViewById(R.id.item_spn_service_type);
+        View holder = convertView;
+        if (holder==null){
+            LayoutInflater inflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        ServiceType serviceType = this.getItem(position);
+            holder = inflater.inflate(R.layout.service_type_spinner,null);
 
-        if(serviceType != null){
-            tvspntendv.setText(serviceType.getName());
         }
-
-        return convertView;
+        final ServiceType obj = objects.get(position);
+        if (obj != null){
+            tvspntendv = holder.findViewById(R.id.item_spn_service_type);
+            tvspntendv.setText(obj.getName());
+        }
+        return holder;
     }
 }
