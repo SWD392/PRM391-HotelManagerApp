@@ -60,19 +60,19 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 if (account.getText().toString().equals("")) {
-                    titleAccount.setError("Field Username cannot blank");
+                    titleAccount.setError("Field Account cannot blank");
                 } else {
                     titleAccount.setError("");
                 }
 
                 if (password.getText().toString().equals("")) {
-                    titlePassword.setError("Field Username cannot blank");
+                    titlePassword.setError("Field Password cannot blank");
                 } else {
                     titlePassword.setError("");
                 }
 
                 if (confirmPassword.getText().toString().equals("")) {
-                    titleConfirmPassword.setError("Field Username cannot blank");
+                    titleConfirmPassword.setError("Field ConfirmPassWord cannot blank");
                 } else {
                     titleConfirmPassword.setError("");
                 }
@@ -94,13 +94,14 @@ public class RegisterActivity extends AppCompatActivity {
 //                        }
                         try {
                             userAccountDatabase.userAccountDAO().insertAll(userAccount);
+                            Toast.makeText(this, "Register Successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(this, LoginActivity.class);
                             startActivity(intent);
                         } catch (Exception e) {
                             Toast.makeText(this, "Register Failed", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        titleAccount.setError("Account exist");
+                        titleAccount.setError("Account exist!");
                     }
                 } else {
                     titleConfirmPassword.setError("Confirm password wrong");
