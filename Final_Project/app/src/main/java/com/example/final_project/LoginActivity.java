@@ -49,10 +49,10 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(button -> {
             if (account.getText().toString().equals("") || password.getText().toString().equals("")) {
                 if (account.getText().toString().equals("")) {
-                    titleAccount.setError("Account was not blank");
+                    titleAccount.setError("Account can not be blank!");
                 }
                 if (password.getText().toString().equals("")) {
-                    titlePassword.setError("Password was not blank");
+                    titlePassword.setError("Password can not be blank!");
                 }
             } else  {
                 UserAccount userAccount = userAccountDatabase.userAccountDAO().getByAccountAndPassword(
@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                         password.getText().toString()
                 );
                 if (userAccount != null) {
-                    Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Login Successfully!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                 } else {
