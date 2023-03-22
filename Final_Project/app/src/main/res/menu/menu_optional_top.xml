@@ -5,7 +5,11 @@
         android:id="@+id/action_logout"
         android:icon="@drawable/ic_logout"
         android:orderInCategory="30"
-        app:showAsAction="ifRoom"
         android:title="LogOut" />
+    <item
+        android:id="@+id/aboutus"
+        android:icon="@drawable/ic_logout"
+        android:orderInCategory="30"
+        android:title="About Us" />
 
 </menu>

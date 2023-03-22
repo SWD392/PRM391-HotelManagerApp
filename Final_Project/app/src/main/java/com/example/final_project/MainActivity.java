@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "You Have Logged Out", Toast.LENGTH_SHORT).show();
             return true;
         }
+        if (id == R.id.aboutus) {
+            Toast.makeText(this, "Haven't Done This Function Yet ", Toast.LENGTH_SHORT).show();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
 
     }
