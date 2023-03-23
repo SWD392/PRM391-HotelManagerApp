@@ -143,7 +143,6 @@ public class AddServiceBillActivity extends AppCompatActivity {
     }
 
     private List<Bill> getAllstatus0() {
-        //todo: Trả về list các status có trong db (tạm thời fix cứng data)
         List<Bill> bills = new ArrayList<>();
         bills.add(new Bill(1, 1, 1, 1, "15/03/2023","16/03/2023", 1, "aaa", "15/03/2023", 50,50, 100));
         bills.add(new Bill(2, 1, 1, 1, "15/03/2023","16/03/2023", 1, "aaa", "15/03/2023", 50,50, 100));

@@ -172,6 +172,7 @@ public class BillFragment extends Fragment {
             DatePickerDialog datePicker = new DatePickerDialog(getActivity(), 0, fromDate, year, month, day);
             datePicker.show();
         });
+
         endDateBtn.setOnClickListener(button -> {
             Calendar nowTime = Calendar.getInstance();
             year = nowTime.get(Calendar.YEAR);
