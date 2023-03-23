@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "userAccount")
 public class UserAccount {
-    //todo: sửa lại file này nhé @Tùng
     @PrimaryKey(autoGenerate = true)
     public Long id;
 

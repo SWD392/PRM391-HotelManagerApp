@@ -1,6 +1,5 @@
 package com.example.final_project.adapter;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -22,17 +21,14 @@ import com.example.final_project.R;
 import com.example.final_project.dao.BillDAO;
 import com.example.final_project.dao.CustomerDAO;
 import com.example.final_project.dao.RoomDao;
-import com.example.final_project.dao.RoomTypeDao;
 import com.example.final_project.entity.Bill;
 import com.example.final_project.entity.Room;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder> {
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private List<Bill> billList;
 
     private Context context;
@@ -57,7 +53,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         return new BillViewHolder(view);
     }
 
-    @SuppressLint({"ResourceAsColor", "NotifyDataSetChanged"})
     @Override
     public void onBindViewHolder(@NonNull BillViewHolder holder, int position) {
         Bill bill = billList.get(position);
@@ -66,9 +61,9 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
         customerDAO = new CustomerDAO(context);
 
         Room room = roomDao.getID(String.valueOf(bill.getRoomId()));
-        if(room != null && room.getName() != null){
+        if (room != null && room.getName() != null) {
             holder.roomName.setText(room.getName());
-            holder.customerName.setText(customerDAO.getID(bill.getCustomerId()+"").getName());
+            holder.customerName.setText(customerDAO.getID(bill.getCustomerId() + "").getName());
             holder.fromDate.setText(bill.getFromDate());
             holder.endDate.setText(bill.getEndDate());
             holder.totalBill.setText(bill.getBillTotal() + "");
@@ -215,12 +210,11 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillViewHolder
 
         startDateDetail.setText(bill.getFromDate());
         endDateDetail.setText(bill.getEndDate());
-        customerDetail.setText(customerDAO.getID(bill.getCustomerId()+"").getName());
-        if(roomDao.getID(String.valueOf(bill.getRoomId())).getName() != null){
+        customerDetail.setText(customerDAO.getID(bill.getCustomerId() + "").getName());
+        if (roomDao.getID(String.valueOf(bill.getRoomId())).getName() != null) {
             roomDetail.setText(roomDao.getID(String.valueOf(bill.getRoomId())).getName());
         }
         noteDetail.setText(bill.getNote());
-        //todo: Sửa thành status
         statusDetail.setText(getStatus(bill.getStatus()));
         totalBillDetail.setText(bill.getBillTotal() + "");
         doneViewBtn.setOnClickListener(button -> {

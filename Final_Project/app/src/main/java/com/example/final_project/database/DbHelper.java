@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 public class DbHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "Hotel_Management";
@@ -57,7 +55,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 "price INTEGER NOT NULL)";
         db.execSQL(createTableService);
 
-        //todo: cái này liên quan đến service, a Dương để ý dùm e!
         String createTableBill_Details = "create table Service_bills (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "bill_id INTEGER REFERENCES Bills(id)," +
