@@ -15,7 +15,9 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -96,13 +98,34 @@ public class BillFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         billDao = new BillDAO(view.getContext());
         roomDao = new RoomDao(view.getContext());
+        customerDAO = new CustomerDAO(view.getContext());
+        EditText searchText = view.findViewById(R.id.search_view_bill);
+        Button searchBtn = view.findViewById(R.id.search_btn);
         super.onViewCreated(view, savedInstanceState);
 
-        getBillRecyclerView(view);
+        getBillRecyclerView(view, new ArrayList<>());
 
         ImageView addViewBtn = view.findViewById(R.id.add_bill_btn);
         addViewBtn.setOnClickListener(button -> {
             openAddBillDialog(view);
+        });
+
+        searchBtn.setOnClickListener(btn -> {
+            List<Bill> filterBill = new ArrayList<>();
+
+            List<Bill> listBills = getBillList(billDao, new ArrayList<>());
+            listBills.forEach(
+                    bill -> {
+                if (customerDAO.getID(bill.getCustomerId() + "").getName().toLowerCase().contains(searchText.getText().toString().toLowerCase())) {
+                    filterBill.add(bill);
+                }
+            });
+
+            if (filterBill.isEmpty()) {
+                Toast.makeText(view.getContext(), "No Bill Found", Toast.LENGTH_SHORT).show();
+            } else {
+                getBillRecyclerView(view, filterBill);
+            }
         });
 
     }
@@ -244,7 +267,7 @@ public class BillFragment extends Fragment {
             if (billDao.insert(bill) > 0) {
                 Toast.makeText(view.getContext(), "Add bill success", Toast.LENGTH_SHORT).show();
                 dialog.cancel();
-                getBillRecyclerView(view);
+                getBillRecyclerView(view, new ArrayList<>());
             } else {
                 Toast.makeText(view.getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
@@ -253,11 +276,10 @@ public class BillFragment extends Fragment {
         dialog.show();
     }
 
-    private void getBillRecyclerView(View view) {
+    private void getBillRecyclerView(View view, List<Bill> billFilter) {
         RecyclerView recyclerView = view.findViewById(R.id.rcv_bill);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        List<Bill> billList = getBillList(billDao);
-
+        List<Bill> billList = getBillList(billDao, billFilter);
 
         Spinner spnRoomStatus = view.findViewById(R.id.spinner_status_hd);
         statusAdapter = new StatusSpinnerAdapter(view.getContext(), R.layout.item_status_spinner_selected, getListStatus());
@@ -316,7 +338,7 @@ public class BillFragment extends Fragment {
     }
 
     private List<Room> filterRoomByDate(RoomDao roomDao, BillDAO billDAO, GregorianCalendar start, GregorianCalendar end) {
-        List<Bill> filterBills = getBillList(billDAO).stream()
+        List<Bill> filterBills = getBillList(billDAO, new ArrayList<>()).stream()
                 .filter(bill -> {
                     Date billStart = convertStringToDate(bill.getFromDate()).getTime();
                     Date billEnd = convertStringToDate(bill.getEndDate()).getTime();
@@ -332,7 +354,8 @@ public class BillFragment extends Fragment {
                 .collect(Collectors.toList());
     }
 
-    private List<Bill> getBillList(BillDAO billDAO) {
+    private List<Bill> getBillList(BillDAO billDAO, List<Bill> billFilter) {
+        if (!billFilter.isEmpty()) return billFilter;
         return billDAO.getAll();
     }
 

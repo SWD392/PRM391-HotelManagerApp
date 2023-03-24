@@ -57,23 +57,6 @@ public class BillServiceDAO {
 
 
     @SuppressLint("Range")
-    public int getTienDV(String...bill_id ){
-        String getDoanhThuTongTien = "SELECT SUM(total) as tienDV FROM Service_bills WHERE bill_id =?";
-        List<Integer> list = new ArrayList<>();
-        Cursor c = db.rawQuery(getDoanhThuTongTien,bill_id);
-        while (c.moveToNext()){
-            try {
-                list.add(Integer.parseInt(c.getString(c.getColumnIndex("tienDV"))));
-            }catch (Exception e){
-                Log.d("zzzz", "getTienDV: "+e);
-                list.add(0);
-            }
-        }
-        return list.get(0);
-    }
-
-
-    @SuppressLint("Range")
     private List<ServiceBill> getData(String sql, String...selectionArgs) {
 
         List<ServiceBill> list = new ArrayList<>();

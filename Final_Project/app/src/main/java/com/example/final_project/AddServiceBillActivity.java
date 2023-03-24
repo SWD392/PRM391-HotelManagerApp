@@ -96,7 +96,7 @@ public class AddServiceBillActivity extends AppCompatActivity {
         bill_service_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listBill = getAllstatus0();
+                listBill = billDAO.getAll();
                 billId = String.valueOf(listBill.get(position).getId());
             }
 
@@ -142,11 +142,4 @@ public class AddServiceBillActivity extends AppCompatActivity {
 
     }
 
-    private List<Bill> getAllstatus0() {
-        List<Bill> bills = new ArrayList<>();
-        bills.add(new Bill(1, 1, 1, 1, "15/03/2023","16/03/2023", 1, "aaa", "15/03/2023", 50,50, 100));
-        bills.add(new Bill(2, 1, 1, 1, "15/03/2023","16/03/2023", 1, "aaa", "15/03/2023", 50,50, 100));
-        bills.add(new Bill(3, 1, 1, 1, "15/03/2023","16/03/2023", 1, "aaa", "15/03/2023", 50,50, 100));
-        return bills;
-    }
 }
